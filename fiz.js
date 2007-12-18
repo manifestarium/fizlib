@@ -1,4 +1,4 @@
-var IZ = {
+var fiz = {
 	// Nabs final item from selector
 	rx1: /([a-zA-z#\.]*)$/,
 
@@ -7,11 +7,11 @@ var IZ = {
 
 	// Match all spaces
 	rx3: /\s/g,
-	
+
 	// Match all periods
 	rx4: /\./g,
 
-	// IZ initialization
+	// Framework initialization
 	init: function(){
 		// Set element paths for quick queries
 		this.setElementPaths();
