@@ -3,8 +3,8 @@
 
 <html>
 	<head>
-		<title>Trackit Map Panels</title>
-		<!--[if lt IE 7]><style>@import "ui/css/ie6.css";</style><![endif]-->
+		<title>Fiz Sandbox Home</title>
+		<style></style>
 	</head>
 	
 	<body>
@@ -110,22 +110,23 @@
 			</div>
 		</div>
 
-		<script type="text/javascript" src="ui/js/iz.js"></script>
-		<script type="text/javascript" src="ui/js/prototype-1.6.js"></script>
+		<script type="text/javascript" src="../fiz.js"></script>
+		<script type="text/javascript" src="prototype-1.6.js"></script>
 		<script type="text/javascript">
-			// IZ init benchmark
-			bench("IZ init:", function(){
-				IZ.init();
+			// Fiz init benchmark
+			bench("Fiz init:", function(){
+				fiz.init();
 			});
-			
-			// prototype benchmark
-			bench("prototype query:", function(){
-				var x = $$("li div ul li div ul.track li#wtf.you.dork");
+
+			// Prototype benchmark
+			bench("Prototype query:", function(){
+				$$("div#leftside > ul");
 			});
-			
-			// IZ benchmark
-			bench("IZ query:", function(){
-				IZ.$("li div ul li div ul.track li#wtf.you.dork");
+
+			// Fiz benchmark
+			bench("Fiz query:", function(){
+				//fiz.$("li div ul li div ul.track li#wtf.you.dork");
+				fiz.$("div#leftside > ul");
 			});
 
 			// Time a func
@@ -143,7 +144,7 @@
 				console.log(message + " " +((endTime-startTime))+'ms');
 			}
 			
-			// returns all html tags in the document
+			// Matches all html tags
 			var tagex = /<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/g;
 		</script>
 	</body>
