@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" 
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html>
+	<head>
+		<title>Trackit Map Panels</title>
+		<!--[if lt IE 7]><style>@import "ui/css/ie6.css";</style><![endif]-->
+	</head>
+	
+	<body>
+		<div id="main">
+			<p class="intro">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+				<a href="http://www.google.com">commodo consequat</a> eiusmod 
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad 
+				minim veniam, quis nostrud exercitation
+			</p>
+
+			<p>	
+				ullamco laboris nisi ut aliquip ex ea Duis aute irure dolor in 
+				reprehend erit in voluptate velit esse cill um dolore eu fugiat 
+				nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
+				sunt in culpa qui officia deserunt mollit anim id est laborum.
+			<p>
+			
+			<blockquote>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do 
+				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut 
+				enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+				nisi ut aliquip ex ea commodo consequat.
+			</blockquote>
+			
+			<div id="summary">
+				<table border="1">
+					<tr>
+						<th>I'm a table header!</th>
+						<th>I'm a table header!</th>
+					<tr>
+					<tr>
+						<td class="number">$50,000</td>
+						<td>salary</td>
+					</tr>
+					<tr>
+						<td class="number">$50,000</td>
+						<td>salary</td>
+					</tr>
+					<tr>
+						<td class="number">$50,000</td>
+						<td>salary</td>
+					</tr>
+					<tr>
+						<td class="number">$50,000</td>
+						<td>salary</td>
+					</tr>
+				</table>
+			</div>
+	
+			<div id="leftside">
+				<ul id="menu">
+					<li class="vegtables">vegetables
+						<div>
+							<ul>
+								<li>celery</li>
+								<li>carrot</li>
+								<li>spinach</li>
+							</ul>
+						</div>
+					</li>
+					
+					<li class="fruit active">fruit
+						<div>
+							<ul>
+								<li>apple</li>
+								<li>orange</li>
+								<li>banana</li>
+								<li>kiwi</li>						
+							</ul>
+						</div>
+					</li>
+					
+					<li class="dairy">dairy
+						<div>
+							<ul>
+								<li>cheese
+									<div>
+										<ul class="track">
+											<li>cheddar</li>
+											<li>provolone</li>
+											<li>bree</li>
+										</ul>
+									</div>
+								</li>
+								<li>milk</li>
+								<li>butter</li>			
+							</ul>
+						</div>
+					</li>
+					
+					<li class="protein">protein
+						<div>
+							<ul>
+								<li>steak</li>
+								<li>bacon</li>
+								<li>eggs</li>
+								<li>almonds</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="ui/js/iz.js"></script>
+		<script type="text/javascript" src="ui/js/prototype-1.6.js"></script>
+		<script type="text/javascript">
+			// IZ init benchmark
+			bench("IZ init:", function(){
+				IZ.init();
+			});
+			
+			// prototype benchmark
+			bench("prototype query:", function(){
+				var x = $$("li div ul li div ul.track li#wtf.you.dork");
+			});
+			
+			// IZ benchmark
+			bench("IZ query:", function(){
+				IZ.$("li div ul li div ul.track li#wtf.you.dork");
+			});
+
+			// Time a func
+			function bench(message, f){
+				// Start timer
+				var startTime = new Date().getTime();
+			
+				// Perform func
+				f();
+			
+				// End timer
+				var endTime = new Date().getTime();
+			
+				// Spit out result
+				console.log(message + " " +((endTime-startTime))+'ms');
+			}
+			
+			// returns all html tags in the document
+			var tagex = /<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/g;
+		</script>
+	</body>
+</html>
