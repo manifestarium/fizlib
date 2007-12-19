@@ -10,7 +10,7 @@ var fiz = {
 
 	// Match all periods
 	rx4: /\./g,
-	
+
 	// Match child selector
 	rx5: /\s>\s/g, 
 
@@ -39,7 +39,7 @@ var fiz = {
 			}
 
 			// i must be greater than 0 here
-			while (--i);
+			while(--i);
 		}
 	},
 
@@ -58,6 +58,28 @@ var fiz = {
 
 		// Path complete
 		node.izPath = path;
+
+		/*//////////////////////////
+		Attach psuedo classes
+		//////////////////////////*/
+		
+		/*
+		var sib = node;
+		
+		// Loop through previous siblings...
+		do(sib = sib.previousSibling);
+		
+		// In search of an element
+		while(sib && sib.nodeType != 1);
+		
+		// No previous siblings, add :first-child
+		if(!sib) node.izPath += ":first-child";
+		*/
+	},
+
+	// TODO: create regex from css selector
+	rxFactory: function(selector){
+		// return expression
 	},
 
 	$: function(selector){
@@ -78,18 +100,21 @@ var fiz = {
 
 		// Fix child selectors
 		expression = expression.replace(this.rx5, '\\s');
-		
+
 		// Replace spaces with .*\s
-		expression = expression.replace(this.rx3,'\.\*\\s') + '[a-zA-Z#\\.]*$';
+		expression = expression.replace(this.rx3,'\.\*\\s') + '[a-zA-Z#:\\.-]*$';
 
 		// Compile the regex
 		var regex = new RegExp(expression);
+		
+		// Create regex from selector
+		//var regex = rxFactory(selector);
 
 		// Our result set and iterator
 		var results = [], i = elements.length;
 
 		// Any elements?
-		if(i > 0) {
+		if(i > 0){
 			// Loop through them
 			do {
 				// Distill the iteration
@@ -100,7 +125,7 @@ var fiz = {
 			}
 
 			// Iterator must be > than 0 here
-			while (--i);
+			while(--i);
 		}
 
 		// Send back the results
