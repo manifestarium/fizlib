@@ -120,13 +120,13 @@
 
 			// Prototype benchmark
 			bench("Prototype query:", function(){
-				$$("div#leftside > ul");
+				$$("#leftside ul#menu > li");
 			});
 
 			// Fiz benchmark
 			bench("Fiz query:", function(){
 				//fiz.$("li div ul li div ul.track li#wtf.you.dork");
-				fiz.$("div#leftside > ul");
+				console.log(fiz.$("#leftside ul#menu > li"));
 			});
 
 			// Time a func
