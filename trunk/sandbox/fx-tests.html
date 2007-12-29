@@ -4,9 +4,20 @@
 <html>
 	<head>
 		<title>Fiz Sandbox Home</title>
+		
+		<style>
+			#animate {
+				position: absolute;
+				width: 50px;
+				height: 50px;
+				background: red;
+			}
+		</style>
 	</head>
 
 	<body>
+		<div id="animate"></div>
+		
 		<div id="main">
 			<p class="intro">
 				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
@@ -319,42 +330,18 @@
 			</div>
 		</div>
 
-		<script type="text/javascript" src="../fiz.js"></script>
-		<script type="text/javascript" src="prototype-1.6.js"></script>
+		<script type="text/javascript" src="../fx/fiz-fx.js"></script>
 		<script type="text/javascript">
-			// Fiz init benchmark
-			bench("Fiz init:", function(){
-				fiz.init();
-			});
-
-			// Prototype benchmark
-			bench("Prototype query:", function(){
-				$$("#leftside ul#menu > li:first-child");
-			});
-
-			// Fiz benchmark
-			bench("Fiz query:", function(){
-				//fiz.$("li div ul li div ul.track li#wtf.you.dork");
-				fiz.$("#leftside ul#menu > li#wtf.crap");
-			});
-
-			// Time a func
-			function bench(message, f){
-				// Start timer
-				var startTime = new Date().getTime();
-
-				// Perform func
-				f();
-
-				// End timer
-				var endTime = new Date().getTime();
-
-				// Spit out result
-				console.log(message + " " +((endTime-startTime))+'ms');
+			//examples
+			div = document.getElementById("animate");
+			
+			div.onclick = function(){
+				tween.play(div.style, "marginTop", tween.formulae.easeOut.expo, 0, 375, 30, function(){
+					tween.play(div.style, "marginLeft", tween.formulae.easeIn.expo, 0, 800, 50, function(){
+						tween.play(div.style, "marginLeft", tween.formulae.easeOut.expo, 800, -200, 50);
+					});
+				});
 			}
-
-			// Matches all html tags
-			var tagex = /<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)\/?>/g;
 		</script>
 	</body>
 </html>
