@@ -1,20 +1,14 @@
 var fiz = {
-	// Nabs final item from selector
-	rx1: /([a-zA-Z#\.]*)$/,
+	// Capture final item from css selector
+	rx1: /[a-zA-Z#\.:-]*$/,
 
-	// Isolate tag name in selector
-	rx2: /[\.#]/,
+	// Isolate tag name from css selector
+	rx2: /^[a-zA-Z]*/,
 
-	// Match all spaces
-	rx3: /\s/g,
+	// Match spaces, match periods, match child selector
+	rx3: /\s/g, rx4: /\./g, rx5: /\s>\s/g,
 
-	// Match all periods
-	rx4: /\./g,
-
-	// Match child selector
-	rx5: /\s>\s/g, 
-
-	// Framework initialization
+	// Framework init
 	init: function(){
 		// Set element paths for quick queries
 		this.setElementPaths();
@@ -31,14 +25,14 @@ var fiz = {
 		var i = tags.length, len = i;
 
 		// Any tags?
-		if(i>0){ 
+		if(i > 0){ 
 			// Loop through them
 			do {
 				// Set their paths
 				this.setElementPath(tags[len-i]);
 			}
 
-			// i must be greater than 0 here
+			// I must be greater than 0 here
 			while(--i);
 		}
 	},
@@ -58,43 +52,10 @@ var fiz = {
 
 		// Path complete
 		node.izPath = path;
-
-		/*//////////////////////////
-		Attach psuedo classes
-		//////////////////////////*/
-		
-		/*
-		var sib = node;
-		
-		// Loop through previous siblings...
-		do(sib = sib.previousSibling);
-		
-		// In search of an element
-		while(sib && sib.nodeType != 1);
-		
-		// No previous siblings, add :first-child
-		if(!sib) node.izPath += ":first-child";
-		*/
 	},
 
-	// TODO: create regex from css selector
+	// Creates a regex from a css selector
 	rxFactory: function(selector){
-		// return expression
-	},
-
-	$: function(selector){
-		// Snag the final item from the selector
-		var tag = this.rx1.exec(selector)[0];
-		
-		// Check for class or id
-		var index = tag.search(this.rx2);
-
-		// Strip them off if they exist
-		if(index > 0) tag = tag.substr(0, index);
-
-		// Grab tags
-		var elements = document.getElementsByTagName(tag);
-
 		// Escape periods
 		var expression = selector.replace(this.rx4, '\\.');
 
@@ -103,12 +64,23 @@ var fiz = {
 
 		// Replace spaces with .*\s
 		expression = expression.replace(this.rx3,'\.\*\\s') + '[a-zA-Z#:\\.-]*$';
-
-		// Compile the regex
-		var regex = new RegExp(expression);
 		
+		// Return the regex
+		return new RegExp(expression);
+	},
+
+	$: function(selector){
+		// Snag the final item from the selector
+		var tag = selector.split(' ');
+		
+		// Check for class or id
+		var tag = this.rx2.exec(tag[tag.length-1]);
+
+		// Grab tags
+		var elements = document.getElementsByTagName(tag);
+
 		// Create regex from selector
-		//var regex = rxFactory(selector);
+		var regex = this.rxFactory(selector);
 
 		// Our result set and iterator
 		var results = [], i = elements.length;
