@@ -1,0 +1,1 @@
+Fiz is a slim javascript skeleton built with end users in mind.
